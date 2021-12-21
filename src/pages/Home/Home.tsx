@@ -1,9 +1,8 @@
-import { useState } from 'react';
-import { useDispatch } from "react-redux";
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../../store/actions/user.action';
 import {userServices} from '../../services';
 import LoginForm from './LoginForm';
+import { AppStore } from '../../store';
 
 const Home = () => {
 
@@ -13,7 +12,7 @@ const Home = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
 
-    const dispatch = useDispatch();
+    const store: any = useContext(AppStore);
 
     const handleClick = async () => {
         try {
@@ -21,7 +20,10 @@ const Home = () => {
             const user = response.data;
 
             localStorage.setItem('access-token', user.access_token);
-            dispatch(login(user));
+            store.user.dispatch({
+                type: "LOGIN",
+                payload: user
+            }, store.user);
 
             navigate('/dashboard');
         } catch (error: any) {

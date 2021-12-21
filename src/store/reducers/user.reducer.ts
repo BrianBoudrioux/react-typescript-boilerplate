@@ -1,16 +1,9 @@
-import { userStore } from "../../types/user.types";
-
 type action = {
     type: string,
     payload: object | string | boolean
 }
 
-const initialState = {
-    user: null,
-    isLogged: false
-};
-
-export default function (state: userStore = initialState, action: action) {
+export default function (state: any, action: action) {
     switch (action.type) {
         case "LOGIN":
             return {

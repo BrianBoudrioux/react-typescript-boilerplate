@@ -1,8 +1,9 @@
 import {Routes, Route, Navigate} from 'react-router-dom';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
-import { useSelector } from "react-redux";
 import { userStore } from './types/user.types';
+import { useContext } from 'react';
+import { AppStore } from './store';
 
 
 
@@ -16,8 +17,8 @@ const AppRouter = () => {
 }
 
 const PrivateRoute = ({ component: Component }: { component: JSX.Element }) => {
-    const userState = useSelector((state: { user: userStore }) => state.user);
-    return !userState.isLogged ? <Navigate to="/" /> : Component;
+    const store: any = useContext(AppStore);
+    return !store.user.isLogged ? <Navigate to="/" /> : Component;
 }
 
 
