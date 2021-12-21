@@ -1,6 +1,6 @@
 import { user } from "../../types/user.types";
 
-export const login = (user: Omit<user, "refresh_token" | "updatedAt">) => {
+export const login = (user: user) => {
     localStorage.setItem('access-token', user.access_token);
     return {
         type: "LOGIN",
