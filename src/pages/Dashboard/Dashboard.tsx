@@ -1,16 +1,44 @@
-import React, { ReactPropTypes } from 'react';
-import { useSelector } from "react-redux";
-import { userState } from '../../store/reducers/user.reducer';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { userStore } from '../../types/user.types';
+import {userServices} from '../../services';
+import { logout } from '../../store/actions/user.action';
 
 const Dashboard = () => {
 
-    const userState = useSelector((state: {user: userState}) => state.user);
+    let navigate = useNavigate();
 
-    console.log(userState);
+    const userState = useSelector((state: {user: userStore}) => state.user);
+    const dispatch = useDispatch();
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        getUsers();
+    }, []);
+
+    const getUsers = async () => {        
+        try {
+            const response = await userServices.getAll();
+            setUsers(response.data.users);
+        } catch (error: any) {
+            if (error.hasRefreshedToken)
+                getUsers();
+            else {
+                dispatch(logout());
+                navigate('/');
+            }
+        }
+    }
         
     return (
         <>
-            <h1>Welcome !</h1>
+            <h1>Welcome {userState.user?.email} !</h1>
+            {users.map((user: {email: string}, key) => {
+                return (
+                    <p key={key}>{user.email}</p>
+                )
+            })}
         </>
     )
 }

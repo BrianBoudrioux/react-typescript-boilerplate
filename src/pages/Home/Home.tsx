@@ -2,25 +2,27 @@ import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../store/actions/user.action';
-import { signIn } from '../../services';
+import {userServices} from '../../services';
 import LoginForm from './LoginForm';
 
 const Home = () => {
 
     let navigate = useNavigate();
 
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
 
     const dispatch = useDispatch();
 
     const handleClick = async () => {
-
         try {
-            const user = await signIn({ username, password })
-            localStorage.setItem('access-token', user.accessToken);
+            const response = await userServices.signIn({ email, password });
+            const user = response.data;
+
+            localStorage.setItem('access-token', user.access_token);
             dispatch(login(user));
+
             navigate('/dashboard');
         } catch (error: any) {
             setError(true);
@@ -32,7 +34,7 @@ const Home = () => {
             <LoginForm 
                 error={error} 
                 setError={setError} 
-                setUsername={setUsername} 
+                setEmail={setEmail} 
                 setPassword={setPassword} 
                 handleClick={handleClick} 
             />

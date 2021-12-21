@@ -17,7 +17,7 @@ const LoginForm = (props: any) => {
                     <TextField
                         className="input"
                         label="Username"
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.setUsername(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.setEmail(e.target.value)}
                     />
                     <br />
                     <TextField

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
     AppBar,
     Toolbar,
@@ -12,20 +12,20 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/actions/user.action";
 
 const NavBar = () => {
-
-    let navigate = useNavigate();
-
     const [drawer, setDrawer] = useState(false);
+    const dispatch = useDispatch();
 
     const toggleDrawer = () => {
         setDrawer(!drawer);
     }
 
-    const logout = () => {
-        // todo use authcontext logout method
+    const exit = () => {
+        dispatch(logout());
         toggleDrawer();
     }
 
@@ -50,7 +50,7 @@ const NavBar = () => {
                 <List>
                     <ListItem>
                         <Link to="/">
-                            <Button color="secondary" onClick={logout}>
+                            <Button color="secondary" onClick={exit}>
                                 <ExitToAppIcon /> Logout
                             </Button>
                         </Link>
