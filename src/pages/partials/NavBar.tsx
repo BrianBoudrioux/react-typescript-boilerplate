@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import {
     AppBar,
     Toolbar,
@@ -13,22 +13,15 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import { Link } from "react-router-dom";
-import { AppStore } from "../../store";
-import { Apps } from "@material-ui/icons";
 
 const NavBar = () => {
     const [drawer, setDrawer] = useState(false);
-    const store:any = useContext(AppStore);
 
     const toggleDrawer = () => {
         setDrawer(!drawer);
     }
 
     const exit = () => {
-        store.user.dispatch({
-            type: "LOGOUT",
-            payload: false
-        }, store.user);
         toggleDrawer();
     }
 

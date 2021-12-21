@@ -7,7 +7,7 @@
       "esnext"
     ],
     "allowJs": true,
-    "skipLibCheck": false,
+    "skipLibCheck": false, // set to false for use global.d.ts (import modules type)
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,

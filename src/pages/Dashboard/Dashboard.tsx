@@ -1,14 +1,11 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { userStore } from '../../types/user.types';
 import {userServices} from '../../services';
-import { AppStore } from '../../store';
 
 const Dashboard = () => {
 
     let navigate = useNavigate();
 
-    const store: any = useContext(AppStore);
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
@@ -23,10 +20,6 @@ const Dashboard = () => {
             if (error.hasRefreshedToken)
                 getUsers();
             else {
-                store.user.dispatch({
-                    type: "LOGOUT",
-                    payload: false
-                }, store.user);
                 navigate('/');
             }
         }
@@ -34,7 +27,7 @@ const Dashboard = () => {
         
     return (
         <>
-            <h1>Welcome {store.user?.email} !</h1>
+            <h1>Welcome !</h1>
             {users.map((user: {email: string}, key) => {
                 return (
                     <p key={key}>{user.email}</p>
