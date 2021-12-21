@@ -1,4 +1,3 @@
-import React from 'react';
 import NavBar from './pages/partials/NavBar';
 import Footer from './pages/partials/Footer';
 

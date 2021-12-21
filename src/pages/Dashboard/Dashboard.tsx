@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { userStore } from '../../types/user.types';
 import {userServices} from '../../services';
+import { userStore } from '../../types/user.types';
 import { logout } from '../../store/actions/user.action';
 
 const Dashboard = () => {
 
     let navigate = useNavigate();
 
+    const [users, setUsers] = useState([]);
+    
     const userState = useSelector((state: {user: userStore}) => state.user);
     const dispatch = useDispatch();
-    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         getUsers();
@@ -33,7 +34,7 @@ const Dashboard = () => {
         
     return (
         <>
-            <h1>Welcome {userState.user?.email} !</h1>
+            <h1>Welcome {userState.user?.email}!</h1>
             {users.map((user: {email: string}, key) => {
                 return (
                     <p key={key}>{user.email}</p>

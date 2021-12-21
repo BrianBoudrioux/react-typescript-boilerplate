@@ -27,9 +27,8 @@ http.interceptors.response.use(response => {
       const access_token = response.data.access_token;
       
       localStorage.setItem("access-token", access_token);
-      http.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
-
       error.hasRefreshedToken = true;
+      
       return Promise.reject(error);
 
     } catch (error) {

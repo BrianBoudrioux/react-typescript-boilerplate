@@ -1,4 +1,4 @@
-import { user } from "../../types/user.types";
+import { user } from "../../types/user.types"
 
 export const login = (user: user) => {
     localStorage.setItem('access-token', user.access_token);
@@ -6,7 +6,7 @@ export const login = (user: user) => {
         type: "LOGIN",
         payload: user
     }
-};
+}
 
 export const logout = () => {
     localStorage.removeItem('access-token');
@@ -14,4 +14,4 @@ export const logout = () => {
         type: "LOGOUT",
         payload: false
     }
-};
+}

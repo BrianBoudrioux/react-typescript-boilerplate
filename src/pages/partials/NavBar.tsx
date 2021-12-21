@@ -13,8 +13,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { logout } from "../../store/actions/user.action";
+import { useDispatch } from "react-redux";
 
 const NavBar = () => {
     const [drawer, setDrawer] = useState(false);

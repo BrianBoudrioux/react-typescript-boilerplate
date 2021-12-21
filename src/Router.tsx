@@ -1,10 +1,8 @@
 import {Routes, Route, Navigate} from 'react-router-dom';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 import { userStore } from './types/user.types';
-
-
 
 const AppRouter = () => {
     return (
