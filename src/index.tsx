@@ -8,14 +8,14 @@ import { login, logout } from './store/user.reducer';
 import { userServices } from './services';
 
 
-  const isAuth = async () => {        
-        try {
-            const response = await userServices.isAuth();
-            store.dispatch(login(response.data));
-        } catch (error: any) {
-            store.dispatch(logout());
-        }
+const isAuth = async () => {        
+  try {
+    const response = await userServices.isAuth();
+    store.dispatch(login(response.data));
+  } catch (error: any) {
+    store.dispatch(logout());
   }
+}
 
 (async () => {
 
