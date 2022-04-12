@@ -1,6 +1,7 @@
 export type user = {
+    id: number | string,
     email: string,
-    password: string,
+    password?: string,
     access_token: string
 }
 

@@ -5,6 +5,9 @@ import { useSelector } from 'react-redux';
 import { userStore } from './types/user.types';
 
 const AppRouter = () => {
+
+    
+
     return (
         <Routes>
             <Route path='/' element={<Home/>} />
@@ -14,6 +17,7 @@ const AppRouter = () => {
 }
 
 const PrivateRoute = ({ component: Component }: { component: JSX.Element }) => {
+
     const userState = useSelector((state: { user: userStore }) => state.user);
     return !userState.isLogged ? <Navigate to="/" /> : Component;
 }

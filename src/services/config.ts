@@ -1,4 +1,6 @@
 import axios from 'axios';
+import store from '../store';
+import { login } from '../store/user.reducer';
 
 const http = axios.create({
   baseURL: `http://localhost:3050`,
@@ -6,8 +8,11 @@ const http = axios.create({
 });
 
 http.interceptors.request.use(request => {
+
+  const state = store.getState();
+  
   if (request.headers)
-    request.headers["Authorization"] = `Bearer ${localStorage.getItem("access-token")}`;
+    request.headers["Authorization"] = `Bearer ${state.user.user?.access_token}`;
 
   return request;
 });
@@ -24,9 +29,8 @@ http.interceptors.response.use(response => {
 
     try {
       const response = await http.get('/users/auth/refresh');
-      const access_token = response.data.access_token;
       
-      localStorage.setItem("access-token", access_token);
+      store.dispatch(login(response.data));
       error.hasRefreshedToken = true;
       
       return Promise.reject(error);

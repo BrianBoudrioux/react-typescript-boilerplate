@@ -13,8 +13,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import { Link } from "react-router-dom";
-import { logout } from "../../store/actions/user.action";
+import { logout } from "../../store/user.reducer";
 import { useDispatch } from "react-redux";
+import { userServices } from '../../services/index';
 
 const NavBar = () => {
     const [drawer, setDrawer] = useState(false);
@@ -24,7 +25,8 @@ const NavBar = () => {
         setDrawer(!drawer);
     }
 
-    const exit = () => {
+    const exit =  async () => {
+        await userServices.logout()
         dispatch(logout());
         toggleDrawer();
     }

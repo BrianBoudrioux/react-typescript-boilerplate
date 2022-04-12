@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import {userServices} from '../../services';
-import LoginForm from './LoginForm';
 import { useDispatch } from 'react-redux';
-import { login } from '../../store/actions/user.action';
+import { useNavigate } from 'react-router-dom';
+import { userServices } from '../../services';
+import { login } from '../../store/user.reducer';
+import LoginForm from './LoginForm';
 
 const Home = () => {
 
@@ -20,10 +20,9 @@ const Home = () => {
             const response = await userServices.signIn({ email, password });
             const user = response.data;
 
-            localStorage.setItem('access-token', user.access_token);
             dispatch(login(user));
-
             navigate('/dashboard');
+            
         } catch (error: any) {
             setError(true);
         }
